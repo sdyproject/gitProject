@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=East+Sea+Dokdo&family=Nanum+Gothic+Coding&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+	<form id="frm">
+	<table class="table table-bordered" style="width:400px;">
+	
+	<tr>
+	<th width="100" bgcolor="gray">제품코드</th>
+	<td>
+	<input type="text" name="code" class="form-control" style="width:100px;">
+	</td>
+	</tr>
+	
+	
+	<tr>
+	<th width="100" bgcolor="gray">상품명</th>
+	<td>
+	<input type="text" name="sang" class="form-control" style="width:100px;">
+	</td>
+	</tr>
+	
+	<tr>
+	<th width="100" bgcolor="gray">가격</th>
+	<td>
+	<input type="text" name="price" class="form-control" style="width:100px;">
+	</td>
+	</tr>
+	
+	<tr>
+	<th width="100" bgcolor="gray">색상</th>
+	<td>
+	<input type="radio" name="color" value="yellow">yellow
+		<input type="radio" name="color" value="red">red
+	
+		<input type="radio" name="color" value="blue">blue
+	
+		<input type="radio" name="color" value="tomato">tomato
+	
+		<input type="radio" name="color" value="pink">pink
+	
+	</td>
+	</tr>
+	
+	<tr>
+	<td colspan="2" align="center">
+	<button type="button" class="btn btn-info" id="btn1">데이터 백엔드로 보내기</button>
+	</td>
+	</tr>
+	</table>
+	
+	</form>
+	
+	<br>
+	<div class="alert alert-info" id="show"></div>
+	
+	
+	
+	
+	
+	<script type="text/javascript">
+	
+	$("#btn1").click(function(){
+		
+		//폼태그 내용 통째로 읽어오기 serialize();
+		var data=$("#frm").serialize();
+		//alert(data)
+		
+		$.ajax({
+			
+			type:"get",
+			url:"ex2_read.jsp",
+			dataType:"json",
+			data:data,
+			success:function(res){
+				
+				var  s="코드:" +res.code+"<br>";
+				s+="상품명:" +res.sang+"<br>";
+				s+="가격:" +res.price+"<br>";
+				s+="색상:" +res.color+"<br>";
+				
+				$("#show").html(s);
+				
+				
+			}
+		})
+	});
+	</script>
+</body>
+</html>
